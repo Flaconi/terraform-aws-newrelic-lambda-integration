@@ -27,6 +27,7 @@ Resources:
       Environment:
         Variables: 
           LICENSE_KEY: !Ref NewRelicLicenseKey
+          LOGGING_ENABLED: true
 
 Outputs:
   LambdaArn:
