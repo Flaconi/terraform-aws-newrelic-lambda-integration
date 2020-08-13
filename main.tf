@@ -28,7 +28,7 @@ resource "aws_s3_bucket" "lambda_newrelic_resource" {
 
 resource "aws_s3_bucket_object" "newrelic_log_ingestion_zip" {
   bucket = aws_s3_bucket.lambda_newrelic_resource.id
-  key    = "newrelic-log-ingestion.zip"
+  key    = "newrelic-log-ingestion-2.3.5.zip"
   source = "${path.module}/newrelic-log-ingestion.zip"
   # The filemd5() function is available in Terraform 0.11.12 and later
   # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
@@ -44,9 +44,6 @@ resource "aws_cloudformation_stack" "newrelic_log_ingestion" {
     Bucket             = aws_s3_bucket.lambda_newrelic_resource.id
     Key                = aws_s3_bucket_object.newrelic_log_ingestion_zip.id
     NewRelicLicenseKey = "${data.aws_ssm_parameter.newrelic_license_key.value}"
-  }
-  lifecycle {
-    ignore_changes = ["template_body"]
   }
 }
 
