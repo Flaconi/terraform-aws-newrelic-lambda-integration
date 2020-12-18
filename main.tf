@@ -47,6 +47,16 @@ resource "aws_cloudformation_stack" "newrelic_log_ingestion" {
   }
 }
 
+resource "aws_cloudformation_stack" "newrelic_license_key_secret" {
+  name          = "NewRelicLicenseKeySecret"
+  template_body = file("${path.module}/nr-license-key-secret.yaml")
+  capabilities  = ["CAPABILITY_NAMED_IAM"]
+  parameters = {
+    Region     = var.region
+    LicenseKey = "${data.aws_ssm_parameter.newrelic_license_key.value}"
+  }
+}
+
 output "newrelic_log_ingestion_lambda_arn" {
   value = lookup(aws_cloudformation_stack.newrelic_log_ingestion.outputs, "LambdaArn")
 }
