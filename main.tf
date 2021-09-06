@@ -20,9 +20,6 @@ resource "aws_s3_bucket_object" "newrelic_log_ingestion_zip" {
   bucket = aws_s3_bucket.lambda_newrelic_resource.id
   key    = "newrelic-log-ingestion-2.3.5.zip"
   source = "${path.module}/newrelic-log-ingestion.zip"
-  # The filemd5() function is available in Terraform 0.11.12 and later
-  # For Terraform 0.11.11 and earlier, use the md5() function and the file() function:
-  # etag = "${md5(file("path/to/file"))}"
   etag = filemd5("${path.module}/newrelic-log-ingestion.zip")
 }
 
@@ -33,7 +30,7 @@ resource "aws_cloudformation_stack" "newrelic_log_ingestion" {
   parameters = {
     Bucket             = aws_s3_bucket.lambda_newrelic_resource.id
     Key                = aws_s3_bucket_object.newrelic_log_ingestion_zip.id
-    NewRelicLicenseKey = "${data.aws_ssm_parameter.newrelic_license_key.value}"
+    NewRelicLicenseKey = data.aws_ssm_parameter.newrelic_license_key.value
   }
 }
 
@@ -43,7 +40,7 @@ resource "aws_cloudformation_stack" "newrelic_license_key_secret" {
   capabilities  = ["CAPABILITY_NAMED_IAM"]
   parameters = {
     Region     = var.region
-    LicenseKey = "${data.aws_ssm_parameter.newrelic_license_key.value}"
+    LicenseKey = data.aws_ssm_parameter.newrelic_license_key.value
   }
 }
 
@@ -56,7 +53,7 @@ resource "aws_cloudformation_stack" "newrelic_lambda_integration" {
   template_body = file("${path.module}/nr-lambda-integration-role.yaml")
   capabilities  = ["CAPABILITY_AUTO_EXPAND", "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
   parameters = {
-    NewRelicAccountNumber = "${data.aws_ssm_parameter.newrelic_account_number.value}"
+    NewRelicAccountNumber = data.aws_ssm_parameter.newrelic_account_number.value
     PolicyName            = ""
   }
 }
