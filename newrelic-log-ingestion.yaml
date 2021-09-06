@@ -6,6 +6,10 @@ Parameters:
     Type: String
     Description: Your NewRelic license key. You may omit it when deploying the function.
     Default: "YOUR_LICENSE_KEY"
+    # Removed because of issue mentioned here:
+    # https://github.com/hashicorp/terraform-provider-aws/issues/55
+    # TODO: resolve it after issue is solved
+    # NoEcho: true
   Bucket:
     Type: String
     Description: The bucket where the newrelic-log-ingestion.zip is placed

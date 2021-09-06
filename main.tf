@@ -51,7 +51,7 @@ output "newrelic_log_ingestion_lambda_arn" {
 resource "aws_cloudformation_stack" "newrelic_lambda_integration" {
   name          = "${local.name}-lambda-integration"
   template_body = file("${path.module}/nr-lambda-integration-role.yaml")
-  capabilities  = ["CAPABILITY_AUTO_EXPAND", "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
+  capabilities  = ["CAPABILITY_NAMED_IAM"]
   parameters = {
     NewRelicAccountNumber = data.aws_ssm_parameter.newrelic_account_number.value
     PolicyName            = ""
