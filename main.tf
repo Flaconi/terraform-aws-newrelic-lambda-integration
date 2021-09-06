@@ -20,7 +20,7 @@ resource "aws_s3_bucket_object" "newrelic_log_ingestion_zip" {
   bucket = aws_s3_bucket.lambda_newrelic_resource.id
   key    = "newrelic-log-ingestion-2.3.5.zip"
   source = "${path.module}/newrelic-log-ingestion.zip"
-  etag = filemd5("${path.module}/newrelic-log-ingestion.zip")
+  etag   = filemd5("${path.module}/newrelic-log-ingestion.zip")
 }
 
 resource "aws_cloudformation_stack" "newrelic_log_ingestion" {
