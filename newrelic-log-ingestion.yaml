@@ -25,14 +25,14 @@ Resources:
       FunctionName: newrelic-log-ingestion
       Timeout: 30
       Environment:
-        Variables: 
+        Variables:
           LICENSE_KEY: !Ref NewRelicLicenseKey
           LOGGING_ENABLED: true
 
 Outputs:
   LambdaArn:
     Description: The arn of the lambda
-    Value: 
+    Value:
      Fn::GetAtt:
           - NewRelicLogIngestionFunction
           - Arn
