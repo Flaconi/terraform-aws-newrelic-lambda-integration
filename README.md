@@ -7,15 +7,15 @@ This module will create lambda for new relic log ingestion.
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.26 |
-| aws | >= 3 |
+| terraform | >= 0.13 |
+| aws | >= 3.57 |
 | random | >= 3.1 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 3 |
+| aws | >= 3.57 |
 | random | >= 3.1 |
 
 ## Inputs
