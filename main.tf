@@ -1,3 +1,8 @@
+moved {
+  from = aws_s3_bucket.lambda_newrelic_resource
+  to   = module.lambda_newrelic_resource_bucket.aws_s3_bucket.this[0]
+}
+
 locals {
   name = "newrelic-${random_string.this.result}"
 }
@@ -7,17 +12,15 @@ resource "random_string" "this" {
   special = false
 }
 
-resource "aws_s3_bucket" "lambda_newrelic_resource" {
-  bucket_prefix = "lambda-newrelic-resource"
-  acl           = "private"
-
-  tags = {
-    Name = "Created by Terraform"
-  }
+module "lambda_newrelic_resource_bucket" {
+  source                                = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v4.1.2"
+  tags                                  = var.tags
+  bucket_prefix                         = "lambda-newrelic-resource"
+  attach_deny_insecure_transport_policy = true
 }
 
-resource "aws_s3_bucket_object" "newrelic_log_ingestion_zip" {
-  bucket = aws_s3_bucket.lambda_newrelic_resource.id
+resource "aws_s3_object" "newrelic_log_ingestion_zip" {
+  bucket = module.lambda_newrelic_resource_bucket.s3_bucket_id
   key    = "newrelic-log-ingestion-2.3.5.zip"
   source = "${path.module}/newrelic-log-ingestion.zip"
   etag   = filemd5("${path.module}/newrelic-log-ingestion.zip")
@@ -28,8 +31,8 @@ resource "aws_cloudformation_stack" "newrelic_log_ingestion" {
   template_body = file("${path.module}/newrelic-log-ingestion.yaml")
   capabilities  = ["CAPABILITY_AUTO_EXPAND", "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
   parameters = {
-    Bucket             = aws_s3_bucket.lambda_newrelic_resource.id
-    Key                = aws_s3_bucket_object.newrelic_log_ingestion_zip.id
+    Bucket             = module.lambda_newrelic_resource_bucket.s3_bucket_id
+    Key                = aws_s3_object.newrelic_log_ingestion_zip.id
     NewRelicLicenseKey = data.aws_ssm_parameter.newrelic_license_key.value
   }
 }

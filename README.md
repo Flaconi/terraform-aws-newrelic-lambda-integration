@@ -20,7 +20,9 @@ This module will create lambda for new relic log ingestion.
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_lambda_newrelic_resource_bucket"></a> [lambda\_newrelic\_resource\_bucket](#module\_lambda\_newrelic\_resource\_bucket) | github.com/terraform-aws-modules/terraform-aws-s3-bucket | v4.1.2 |
 
 ## Resources
 
@@ -29,8 +31,7 @@ No modules.
 | [aws_cloudformation_stack.newrelic_lambda_integration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
 | [aws_cloudformation_stack.newrelic_license_key_secret](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
 | [aws_cloudformation_stack.newrelic_log_ingestion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
-| [aws_s3_bucket.lambda_newrelic_resource](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_object.newrelic_log_ingestion_zip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_object) | resource |
+| [aws_s3_object.newrelic_log_ingestion_zip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
 | [random_string.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [aws_ssm_parameter.newrelic_account_number](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
 | [aws_ssm_parameter.newrelic_license_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
@@ -42,6 +43,7 @@ No modules.
 | <a name="input_newrelic_account_number"></a> [newrelic\_account\_number](#input\_newrelic\_account\_number) | n/a | `string` | `""` | no |
 | <a name="input_newrelic_license_key_path"></a> [newrelic\_license\_key\_path](#input\_newrelic\_license\_key\_path) | n/a | `string` | `""` | no |
 | <a name="input_region"></a> [region](#input\_region) | n/a | `string` | `"eu-central-1"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Map of custom tags for the provisioned resources | `map(string)` | `{}` | no |
 
 ## Outputs
 
