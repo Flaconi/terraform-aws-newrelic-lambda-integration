@@ -1,54 +1,114 @@
 # Terraform NewRelic integration
-
 This module will create lambda for new relic log ingestion.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
 
-| Name | Version |
-|------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.57 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.1 |
+<!-- TFDOCS_HEADER_START -->
 
+
+<!-- TFDOCS_HEADER_END -->
+
+<!-- TFDOCS_PROVIDER_START -->
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.57 |
-| <a name="provider_random"></a> [random](#provider\_random) | >= 3.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 5.78 |
+| <a name="provider_random"></a> [random](#provider\_random) | ~> 3.6 |
 
+<!-- TFDOCS_PROVIDER_END -->
+
+<!-- TFDOCS_MODULES_START -->
 ## Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_lambda_newrelic_resource_bucket"></a> [lambda\_newrelic\_resource\_bucket](#module\_lambda\_newrelic\_resource\_bucket) | github.com/terraform-aws-modules/terraform-aws-s3-bucket | v4.1.2 |
 
-## Resources
+<!-- TFDOCS_MODULES_END -->
 
-| Name | Type |
-|------|------|
-| [aws_cloudformation_stack.newrelic_lambda_integration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
-| [aws_cloudformation_stack.newrelic_license_key_secret](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
-| [aws_cloudformation_stack.newrelic_log_ingestion](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
-| [aws_s3_object.newrelic_log_ingestion_zip](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_object) | resource |
-| [random_string.this](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
-| [aws_ssm_parameter.newrelic_account_number](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
-| [aws_ssm_parameter.newrelic_license_key](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ssm_parameter) | data source |
+<!-- TFDOCS_REQUIREMENTS_START -->
+## Requirements
 
-## Inputs
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.78 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6 |
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| <a name="input_newrelic_account_number"></a> [newrelic\_account\_number](#input\_newrelic\_account\_number) | n/a | `string` | `""` | no |
-| <a name="input_newrelic_license_key_path"></a> [newrelic\_license\_key\_path](#input\_newrelic\_license\_key\_path) | n/a | `string` | `""` | no |
-| <a name="input_region"></a> [region](#input\_region) | n/a | `string` | `"eu-central-1"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Map of custom tags for the provisioned resources | `map(string)` | `{}` | no |
+<!-- TFDOCS_REQUIREMENTS_END -->
 
+<!-- TFDOCS_INPUTS_START -->
+## Required Inputs
+
+No required inputs.
+
+## Optional Inputs
+
+The following input variables are optional (have default values):
+
+### <a name="input_newrelic_license_key_path"></a> [newrelic\_license\_key\_path](#input\_newrelic\_license\_key\_path)
+
+Description: n/a
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_newrelic_account_number"></a> [newrelic\_account\_number](#input\_newrelic\_account\_number)
+
+Description: n/a
+
+Type: `string`
+
+Default: `""`
+
+### <a name="input_create_license_key_stack"></a> [create\_license\_key\_stack](#input\_create\_license\_key\_stack)
+
+Description: n/a
+
+Type: `bool`
+
+Default: `true`
+
+### <a name="input_create_log_ingestion_stack"></a> [create\_log\_ingestion\_stack](#input\_create\_log\_ingestion\_stack)
+
+Description: n/a
+
+Type: `bool`
+
+Default: `true`
+
+### <a name="input_create_lambda_integration_stack"></a> [create\_lambda\_integration\_stack](#input\_create\_lambda\_integration\_stack)
+
+Description: n/a
+
+Type: `bool`
+
+Default: `true`
+
+### <a name="input_region"></a> [region](#input\_region)
+
+Description: n/a
+
+Type: `string`
+
+Default: `"eu-central-1"`
+
+### <a name="input_tags"></a> [tags](#input\_tags)
+
+Description: Map of custom tags for the provisioned resources
+
+Type: `map(string)`
+
+Default: `{}`
+
+<!-- TFDOCS_INPUTS_END -->
+
+<!-- TFDOCS_OUTPUTS_START -->
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_newrelic_log_ingestion_lambda_arn"></a> [newrelic\_log\_ingestion\_lambda\_arn](#output\_newrelic\_log\_ingestion\_lambda\_arn) | n/a |
 
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- TFDOCS_OUTPUTS_END -->

@@ -8,6 +8,21 @@ variable "newrelic_account_number" {
   default = ""
 }
 
+variable "create_license_key_stack" {
+  type    = bool
+  default = true
+}
+
+variable "create_log_ingestion_stack" {
+  type    = bool
+  default = true
+}
+
+variable "create_lambda_integration_stack" {
+  type    = bool
+  default = true
+}
+
 variable "region" {
   type    = string
   default = "eu-central-1"
