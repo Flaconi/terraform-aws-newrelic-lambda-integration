@@ -24,4 +24,4 @@ jobs:
 
       - name: Files lint
         run: |
-          make "lint-files"
+          make "lint"
