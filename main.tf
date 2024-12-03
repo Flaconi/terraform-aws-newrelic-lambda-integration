@@ -41,7 +41,7 @@ resource "aws_cloudformation_stack" "newrelic_log_ingestion" {
 }
 
 output "newrelic_log_ingestion_lambda_arn" {
-  value = var.create_log_ingestion_stack ? lookup(aws_cloudformation_stack.newrelic_log_ingestion[0].outputs, "LambdaArn") : null
+  value = var.create_log_ingestion_stack ? lookup(aws_cloudformation_stack.newrelic_log_ingestion[0].outputs, "LambdaArn") : ""
 }
 
 moved {
