@@ -35,7 +35,7 @@ resource "aws_cloudformation_stack" "newrelic_log_ingestion" {
   capabilities  = ["CAPABILITY_AUTO_EXPAND", "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"]
   parameters = {
     Bucket             = module.lambda_newrelic_resource_bucket.s3_bucket_id
-    Key                = aws_s3_object.newrelic_log_ingestion_zip[0].id
+    Key                = aws_s3_object.newrelic_log_ingestion_zip[0].key
     NewRelicLicenseKey = data.aws_ssm_parameter.newrelic_license_key.value
   }
 }
