@@ -23,11 +23,6 @@ variable "create_lambda_integration_stack" {
   default = true
 }
 
-variable "region" {
-  type    = string
-  default = "eu-central-1"
-}
-
 variable "tags" {
   description = "Map of custom tags for the provisioned resources"
   type        = map(string)
