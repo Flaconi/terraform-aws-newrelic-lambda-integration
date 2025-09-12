@@ -13,10 +13,11 @@ resource "random_string" "this" {
 }
 
 module "lambda_newrelic_resource_bucket" {
-  create_bucket                         = var.create_log_ingestion_stack
-  source                                = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v4.1.2"
-  tags                                  = var.tags
-  bucket_prefix                         = "lambda-newrelic-resource"
+  create_bucket = var.create_log_ingestion_stack
+  source        = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.7.0"
+  tags          = var.tags
+  bucket_prefix = "lambda-newrelic-resource"
+
   attach_deny_insecure_transport_policy = true
 }
 
@@ -55,7 +56,7 @@ resource "aws_cloudformation_stack" "newrelic_license_key_secret" {
   template_body = file("${path.module}/nr-license-key-secret.yaml")
   capabilities  = ["CAPABILITY_NAMED_IAM"]
   parameters = {
-    Region     = var.region
+    Region     = data.aws_region.current.region
     LicenseKey = data.aws_ssm_parameter.newrelic_license_key.value
   }
 }

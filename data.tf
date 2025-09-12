@@ -1,3 +1,5 @@
+data "aws_region" "current" {}
+
 data "aws_ssm_parameter" "newrelic_license_key" {
   name            = var.newrelic_license_key_path
   with_decryption = true

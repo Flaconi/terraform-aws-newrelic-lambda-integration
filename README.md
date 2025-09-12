@@ -86,14 +86,6 @@ Type: `bool`
 
 Default: `true`
 
-### <a name="input_region"></a> [region](#input\_region)
-
-Description: n/a
-
-Type: `string`
-
-Default: `"eu-central-1"`
-
 ### <a name="input_tags"></a> [tags](#input\_tags)
 
 Description: Map of custom tags for the provisioned resources
