@@ -14,7 +14,7 @@ resource "random_string" "this" {
 
 module "lambda_newrelic_resource_bucket" {
   create_bucket = var.create_log_ingestion_stack
-  source        = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.7.0"
+  source        = "github.com/terraform-aws-modules/terraform-aws-s3-bucket?ref=v5.17.0"
   tags          = var.tags
   bucket_prefix = "lambda-newrelic-resource"
 
